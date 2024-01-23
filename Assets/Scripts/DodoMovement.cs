@@ -22,10 +22,11 @@ public class dodoMovement : MonoBehaviour
     void FixedUpdate()
     {
         //At each frame, we reset the horizontal and vertical movements of the dodo
-        if(Input.GetButtonDown("Jump"))
+        if(Input.GetKeyDown(KeyCode.F))
         {
             isShrieking=true;
         }
+        DodoSound();
         MoveDodo();
         SetAnimator();
     }
@@ -35,16 +36,20 @@ public class dodoMovement : MonoBehaviour
         float verticalMovement = Input.GetAxis("Vertical")*moveSpeed*Time.deltaTime;
         Vector3 targetVelocity =new Vector2(horizontalMovement, verticalMovement);
         body.velocity=Vector3.SmoothDamp(body.velocity, targetVelocity, ref velocity, .05f);
-        if (isShrieking==true)
-        {
-            dodoSound.Play();
-            isShrieking=false;
-        }
+        
     }
     void SetAnimator()
     {
         animator.SetFloat("HorizontalSpeed",body.velocity.x);
         animator.SetFloat("VerticalSpeed",body.velocity.y);
 
+    }
+    void DodoSound()
+    {
+        if (isShrieking==true)
+        {
+            dodoSound.Play();
+            isShrieking=false;
+        }
     }
 }
