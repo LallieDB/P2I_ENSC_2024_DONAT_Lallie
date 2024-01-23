@@ -1,19 +1,19 @@
 # P2I_ENSC_2024
 
-##Installation##
+## Installation
 Pour installer le projet sur votre ordinateur, placez-vous tout d'abord dans le bon emplacement de fichier et suivez les consignes suivantes.
 Ouvrez votre terminal de commande et tapez l'instruction suivante : 
 `git clone https://github.com/LallieDB/P2I_ENSC_2024.git`
 Ouvrez le projet P2I_ENSC_2024 sur Unity
 C'est parti ! 
 
-##Le jeu##
-###Introduction###
+## Le jeu
+### Introduction
 Ce projet comporte le jeu **L'île et l'oiseau**. 
 Dans ce jeu, un dodo doit faire des quêtes pour partir de l'île avant que les humains débarquent et le tue.
 
 
-###Fonctionnalités###
+### Fonctionnalités
 Cette version git comporte :
 - la carte du jeu comprenant le dodo
 - la possibilité de déplacer le dodo sur la carte
