@@ -2,9 +2,13 @@
 
 ## Installation
 Pour installer le projet sur votre ordinateur, placez-vous tout d'abord dans le bon emplacement de fichier et suivez les consignes suivantes.
+
 Ouvrez votre terminal de commande et tapez l'instruction suivante : 
+
 `git clone https://github.com/LallieDB/P2I_ENSC_2024.git`
-Ouvrez le projet P2I_ENSC_2024 sur Unity
+
+Ouvrez le projet P2I_ENSC_2024 sur Unity.
+Dans l'onglet "Projet", aller dans "Assets" et doucle cliquez sur le fichier "sauvegarde"
 C'est parti ! 
 
 ## Le jeu
