@@ -4,13 +4,14 @@ using UnityEngine;
 public class dodoMovement : MonoBehaviour
 {
     // Start is called before the first frame update
+    public AudioSource dodoSound;
     public float moveSpeed;
     // public float jumpForce;
     public Rigidbody2D body;
     public Animator animator;
     private Vector3 velocity = Vector3.zero;
 
-    // private bool isJumping;
+    private bool isShrieking;
 
     void Start()
     {
@@ -21,25 +22,24 @@ public class dodoMovement : MonoBehaviour
     void FixedUpdate()
     {
         //At each frame, we reset the horizontal and vertical movements of the dodo
-        float horizontalMovement = Input.GetAxis("Horizontal")*moveSpeed*Time.deltaTime;
-        float verticalMovement = Input.GetAxis("Vertical")*moveSpeed*Time.deltaTime;
-        // if(Input.GetButtonDown("Jump"))
-        // {
-        //     isJumping=true;
-        // }
-
-        MoveDodo(horizontalMovement, verticalMovement);
+        if(Input.GetButtonDown("Jump"))
+        {
+            isShrieking=true;
+        }
+        MoveDodo();
         SetAnimator();
     }
-    void MoveDodo(float _horizontalMovement, float _verticalMovement)
+    void MoveDodo()
     {
-        Vector3 targetVelocity =new Vector2(_horizontalMovement, _verticalMovement);
+        float horizontalMovement = Input.GetAxis("Horizontal")*moveSpeed*Time.deltaTime;
+        float verticalMovement = Input.GetAxis("Vertical")*moveSpeed*Time.deltaTime;
+        Vector3 targetVelocity =new Vector2(horizontalMovement, verticalMovement);
         body.velocity=Vector3.SmoothDamp(body.velocity, targetVelocity, ref velocity, .05f);
-        // if (isJumping==true)
-        // {
-        //     body.AddForce(new Vector2(0f,jumpForce));
-        //     isJumping=false;
-        // }
+        if (isShrieking==true)
+        {
+            dodoSound.Play();
+            isShrieking=false;
+        }
     }
     void SetAnimator()
     {
