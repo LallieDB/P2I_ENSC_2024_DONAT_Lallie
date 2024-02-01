@@ -2,20 +2,27 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ParrotScirpt : MonoBehaviour
+public class ParrotScript : MonoBehaviour
 {
     public Animator animator;
     public Rigidbody2D parrotBody;
+    public Rigidbody2D dodoBody;
+    public Dialogue parrotDialogue;
     public float previousValueOfRotation;
+    public bool isDialogueTrigger;
+
     void Start()
     {
         parrotBody = GetComponent<Rigidbody2D>();
         previousValueOfRotation=parrotBody.rotation;
+        parrotDialogue=CreateParrotDialogue();
+        isDialogueTrigger=false;
     }
     void Update()
     {
         //At each frame, we reinitialize the animation of the parrot
         previousValueOfRotation=SetAnimator(previousValueOfRotation);
+        TriggerDialogue();
     }
     public float SetAnimator(float _previousValueOfRotation)
     {
@@ -29,4 +36,42 @@ public class ParrotScirpt : MonoBehaviour
         animator.SetBool("isHit", rotate); //we set the value of rotation to the animator
         return parrotBody.rotation;
     }
+    public bool IsInRangeDialogue()
+    {
+        if (Math.Sqrt(Math.Pow(parrotBody.position.x -dodoBody.position.x,2) + Math.Pow(parrotBody.position.y -dodoBody.position.y,2)) <3) 
+        {
+             return true;
+        }
+        return false;
+
+    }
+    private Dialogue CreateParrotDialogue()
+    {
+        //The parrot dialogue
+        Dialogue dialogue = new Dialogue();
+        dialogue.name= "Parrot";
+
+        dialogue.lines = new DialogueLine[]
+        {
+            new DialogueLine("Croaaaa! Croaaaa!", false),
+            new DialogueLine("Stop hiiiiiting me!", true, new Choice("I don't want..."), new Choice("My apologies")),
+            new DialogueLine("Crroooaaaaaa !", false),
+            new DialogueLine("You're welllcome !", false),
+            
+        };
+
+        return dialogue;
+    }
+
+    public void TriggerDialogue()
+    {
+        if (isDialogueTrigger==false && IsInRangeDialogue()==true)
+        {
+            DialogueManager.instance.EndDialogue();
+            DialogueManager.instance.ChangingDialogue(parrotDialogue); 
+            DialogueManager.instance.StartDialogue();
+        }
+        isDialogueTrigger=true;
+    }
+
 }
