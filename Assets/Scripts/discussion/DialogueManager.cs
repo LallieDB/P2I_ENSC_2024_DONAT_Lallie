@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
+    public GameObject DialogueUI;
     public Text nameText;
     public Text dialogueText;
     public Button choice1Button;
@@ -48,6 +49,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue()
     {
+        DialogueUI.SetActive(true);
         currentLineIndex = 0;
         DisplayLine(currentDialogue.lines[currentLineIndex]);
     }
@@ -59,6 +61,13 @@ public class DialogueManager : MonoBehaviour
         choice1Button.gameObject.SetActive(line.hasChoice);
         choice2Button.gameObject.SetActive(line.hasChoice);
         nextButton.gameObject.SetActive(!line.hasChoice);
+        if (line.hasChoice==true)
+        {
+            choice1Button.GetComponentInChildren<Text>().text = currentDialogue.lines[currentLineIndex].choice1.text;
+            choice2Button.GetComponentInChildren<Text>().text = currentDialogue.lines[currentLineIndex].choice2.text;
+        }
+        
+
     }
 
     private void OnNextButtonClicked()
@@ -91,19 +100,17 @@ public class DialogueManager : MonoBehaviour
         Debug.Log("Selected Choice: " + choice.text);
 
         // Advance to the next line
-        currentLineIndex++;
-        DisplayLine(currentDialogue.lines[currentLineIndex]);
+        // currentLineIndex++;
+        // if( choice.firstChoice==false)
+        //     currentLineIndex++;
+        DisplayLine(choice.answer);
     }
 
     public void EndDialogue()
     {
         // Reset the dialogue UI or close the dialogue box
         Debug.Log("End of Dialogue");
-        // nameText.gameObject.SetActive(false);
-        // dialogueText.gameObject.SetActive(false);
-        // choice1Button.gameObject.SetActive(false);
-        // choice2Button.gameObject.SetActive(false);
-        // nextButton.gameObject.SetActive(false);
+        DialogueUI.SetActive(false);
 
     }
 
@@ -111,14 +118,14 @@ public class DialogueManager : MonoBehaviour
     private Dialogue CreateSampleDialogue()
     {
         Dialogue dialogue = new Dialogue();
-        dialogue.name= "test";
+        dialogue.name= "Narrator";
 
         dialogue.lines = new DialogueLine[]
         {
             new DialogueLine("Hello there! What are you still doing there ?", false),
-            new DialogueLine("Humans are coming ! You should run !", true, new Choice("I can't fly..."), new Choice("I want to stay here")),
-            new DialogueLine("Find some or you're gonna die !", false),
-            new DialogueLine("That's okay. But you should be aware that humans LOVE dodo.", false),
+            new DialogueLine("Humans are coming ! You should run !", true, new Choice("I can't fly...",new DialogueLine("Find some or you're gonna die !", false)), new Choice("I want to stay here", new DialogueLine("That's okay. But you should be aware that humans LOVE dodo.", false))),
+            // new DialogueLine("Find some or you're gonna die !", false),
+            // new DialogueLine("That's okay. But you should be aware that humans LOVE dodo.", false),
             new DialogueLine("Humans EAT dodo.", false)
         };
 
@@ -154,9 +161,17 @@ public class DialogueLine
 public class Choice
 {
     public string text;
+    public bool firstChoice;
+    public DialogueLine answer;
 
-    public Choice(string text)
+    public Choice(string text, bool firstChoice)
     {
         this.text = text;
+        this.firstChoice=firstChoice;
+    }
+    public Choice(string text, DialogueLine answer)
+    {
+        this.text = text;
+        this.answer=answer ;
     }
 }

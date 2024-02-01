@@ -9,20 +9,23 @@ public class ParrotScript : MonoBehaviour
     public Rigidbody2D dodoBody;
     public Dialogue parrotDialogue;
     public float previousValueOfRotation;
-    public bool isDialogueTrigger;
+    // public bool isDialogueTrigger;
 
     void Start()
     {
         parrotBody = GetComponent<Rigidbody2D>();
         previousValueOfRotation=parrotBody.rotation;
         parrotDialogue=CreateParrotDialogue();
-        isDialogueTrigger=false;
+        // isDialogueTrigger=false;
     }
     void Update()
     {
         //At each frame, we reinitialize the animation of the parrot
         previousValueOfRotation=SetAnimator(previousValueOfRotation);
-        TriggerDialogue();
+        if( Input.GetKeyDown(KeyCode.P))
+        {
+            TriggerDialogue();
+        }
     }
     public float SetAnimator(float _previousValueOfRotation)
     {
@@ -54,10 +57,7 @@ public class ParrotScript : MonoBehaviour
         dialogue.lines = new DialogueLine[]
         {
             new DialogueLine("Croaaaa! Croaaaa!", false),
-            new DialogueLine("Stop hiiiiiting me!", true, new Choice("I don't want..."), new Choice("My apologies")),
-            new DialogueLine("Crroooaaaaaa !", false),
-            new DialogueLine("You're welllcome !", false),
-            
+            new DialogueLine("Stop hiiiiiting me!", true, new Choice("I don't want...", new DialogueLine("Crroooaaaaaa !", false)), new Choice("My apologies",new DialogueLine("You're welllcome !", false))),            
         };
 
         return dialogue;
@@ -65,13 +65,13 @@ public class ParrotScript : MonoBehaviour
 
     public void TriggerDialogue()
     {
-        if (isDialogueTrigger==false && IsInRangeDialogue()==true)
+        if (IsInRangeDialogue()==true)
         {
             DialogueManager.instance.EndDialogue();
             DialogueManager.instance.ChangingDialogue(parrotDialogue); 
             DialogueManager.instance.StartDialogue();
         }
-        isDialogueTrigger=true;
+        // isDialogueTrigger=true;
     }
 
 }
