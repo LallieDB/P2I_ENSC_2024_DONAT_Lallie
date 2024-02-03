@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "P2I_ENSC_2024.sln"
+    "dotnet.defaultSolution": "P2I_ENSC_2024_DONAT_Lallie.sln"
 }

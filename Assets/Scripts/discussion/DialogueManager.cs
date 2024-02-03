@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI; 
+using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -16,7 +16,9 @@ public class DialogueManager : MonoBehaviour
     private Dialogue currentDialogue;
     private int currentLineIndex = 0;
 
+    //Allow to use easily DialogueManager method in other scripts
     public static DialogueManager instance;
+
     private void Awake()
     {
         if (instance != null)
@@ -24,7 +26,7 @@ public class DialogueManager : MonoBehaviour
             Debug.LogWarning("Il y a plus d'une instance DialogueManager dans la console");
             return;
         }
-        instance=this;
+        instance = this;
     }
 
     void Start()
@@ -44,34 +46,40 @@ public class DialogueManager : MonoBehaviour
 
     public void ChangingDialogue(Dialogue _newdialogue)
     {
-        currentDialogue=_newdialogue;
+        //change the dialogue to read
+        currentDialogue = _newdialogue;
     }
 
     public void StartDialogue()
     {
-        DialogueUI.SetActive(true);
+        DialogueUI.SetActive(true); //show th UI interface
         currentLineIndex = 0;
-        DisplayLine(currentDialogue.lines[currentLineIndex]);
+        DisplayLine(currentDialogue.lines[currentLineIndex]); //show the dialogue line by line
     }
 
     private void DisplayLine(DialogueLine line)
     {
-        nameText.text=currentDialogue.name;
+        nameText.text = currentDialogue.name;
         dialogueText.text = line.text;
-        choice1Button.gameObject.SetActive(line.hasChoice);
-        choice2Button.gameObject.SetActive(line.hasChoice);
-        nextButton.gameObject.SetActive(!line.hasChoice);
-        if (line.hasChoice==true)
+        choice1Button.gameObject.SetActive(line.hasChoice); //show the choice button1 if there is a choice
+        choice2Button.gameObject.SetActive(line.hasChoice); //show the choice button2 if there is a choice
+        nextButton.gameObject.SetActive(!line.hasChoice); //show the next button if there is not a choice
+        if (line.hasChoice == true) //set the text of the choice buttons
         {
-            choice1Button.GetComponentInChildren<Text>().text = currentDialogue.lines[currentLineIndex].choice1.text;
-            choice2Button.GetComponentInChildren<Text>().text = currentDialogue.lines[currentLineIndex].choice2.text;
+            choice1Button.GetComponentInChildren<Text>().text = currentDialogue
+                .lines[currentLineIndex]
+                .choice1
+                .text;
+            choice2Button.GetComponentInChildren<Text>().text = currentDialogue
+                .lines[currentLineIndex]
+                .choice2
+                .text;
         }
-        
-
     }
 
     private void OnNextButtonClicked()
     {
+        // if the next button is played, show the following line
         currentLineIndex++;
         if (currentLineIndex < currentDialogue.lines.Length)
         {
@@ -98,37 +106,46 @@ public class DialogueManager : MonoBehaviour
     {
         // Handle the chosen choice (e.g., change variables, trigger events)
         Debug.Log("Selected Choice: " + choice.text);
-
-        // Advance to the next line
-        // currentLineIndex++;
-        // if( choice.firstChoice==false)
-        //     currentLineIndex++;
+        // Advance to the line of the selected choice
         DisplayLine(choice.answer);
     }
 
     public void EndDialogue()
     {
-        // Reset the dialogue UI or close the dialogue box
+        // Close the UI dialogue
         Debug.Log("End of Dialogue");
         DialogueUI.SetActive(false);
-
     }
 
-    // Sample dialogue data (you can replace this with loading from an external source)
+    // First dialogue
     private Dialogue CreateSampleDialogue()
     {
+        //Initialize the first dialogue
         Dialogue dialogue = new Dialogue();
-        dialogue.name= "Narrator";
+        dialogue.name = "Narrator";
 
         dialogue.lines = new DialogueLine[]
         {
             new DialogueLine("Hello there! What are you still doing there ?", false),
-            new DialogueLine("Humans are coming ! You should run !", true, new Choice("I can't fly...",new DialogueLine("Find some or you're gonna die !", false)), new Choice("I want to stay here", new DialogueLine("That's okay. But you should be aware that humans LOVE dodo.", false))),
+            new DialogueLine(
+                "Humans are coming ! You should run !",
+                true,
+                new Choice(
+                    "I can't fly...",
+                    new DialogueLine("Find some or you're gonna die !", false)
+                ),
+                new Choice(
+                    "I want to stay here",
+                    new DialogueLine(
+                        "That's okay. But you should be aware that humans LOVE dodo.",
+                        false
+                    )
+                )
+            ),
             // new DialogueLine("Find some or you're gonna die !", false),
             // new DialogueLine("That's okay. But you should be aware that humans LOVE dodo.", false),
             new DialogueLine("Humans EAT dodo.", false)
         };
-
         return dialogue;
     }
 }
@@ -161,17 +178,18 @@ public class DialogueLine
 public class Choice
 {
     public string text;
-    public bool firstChoice;
+
+    // public bool firstChoice;
     public DialogueLine answer;
 
-    public Choice(string text, bool firstChoice)
-    {
-        this.text = text;
-        this.firstChoice=firstChoice;
-    }
+    // public Choice(string text, bool firstChoice)
+    // {
+    //     this.text = text;
+    //     this.firstChoice=firstChoice;
+    // }
     public Choice(string text, DialogueLine answer)
     {
         this.text = text;
-        this.answer=answer ;
+        this.answer = answer;
     }
 }
