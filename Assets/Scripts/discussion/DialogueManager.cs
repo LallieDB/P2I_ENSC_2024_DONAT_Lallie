@@ -52,7 +52,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue()
     {
-        DialogueUI.SetActive(true); //show th UI interface
+        DialogueUI.SetActive(true); //show the UI interface
         currentLineIndex = 0;
         DisplayLine(currentDialogue.lines[currentLineIndex]); //show the dialogue line by line
     }
@@ -66,14 +66,8 @@ public class DialogueManager : MonoBehaviour
         nextButton.gameObject.SetActive(!line.hasChoice); //show the next button if there is not a choice
         if (line.hasChoice == true) //set the text of the choice buttons
         {
-            choice1Button.GetComponentInChildren<Text>().text = currentDialogue
-                .lines[currentLineIndex]
-                .choice1
-                .text;
-            choice2Button.GetComponentInChildren<Text>().text = currentDialogue
-                .lines[currentLineIndex]
-                .choice2
-                .text;
+            choice1Button.GetComponentInChildren<Text>().text = currentDialogue.lines[currentLineIndex].choice1.text;
+            choice2Button.GetComponentInChildren<Text>().text = currentDialogue.lines[currentLineIndex].choice2.text;
         }
     }
 
@@ -94,12 +88,14 @@ public class DialogueManager : MonoBehaviour
 
     private void OnChoice1Selected()
     {
-        HandleChoice(currentDialogue.lines[currentLineIndex].choice1);
+        currentDialogue.lines[currentLineIndex].choice1.isChosen=true; //set that the choice 1 is chosen
+        HandleChoice(currentDialogue.lines[currentLineIndex].choice1); //continue the dialogue
     }
 
     private void OnChoice2Selected()
     {
-        HandleChoice(currentDialogue.lines[currentLineIndex].choice2);
+        currentDialogue.lines[currentLineIndex].choice2.isChosen=true; //set that the choice 2 is chosen
+        HandleChoice(currentDialogue.lines[currentLineIndex].choice2);//continue the dialogue
     }
 
     private void HandleChoice(Choice choice)
@@ -142,8 +138,6 @@ public class DialogueManager : MonoBehaviour
                     )
                 )
             ),
-            // new DialogueLine("Find some or you're gonna die !", false),
-            // new DialogueLine("That's okay. But you should be aware that humans LOVE dodo.", false),
             new DialogueLine("Humans EAT dodo.", false)
         };
         return dialogue;
@@ -179,17 +173,14 @@ public class Choice
 {
     public string text;
 
-    // public bool firstChoice;
+    public bool isChosen;
     public DialogueLine answer;
 
-    // public Choice(string text, bool firstChoice)
-    // {
-    //     this.text = text;
-    //     this.firstChoice=firstChoice;
-    // }
+    
     public Choice(string text, DialogueLine answer)
     {
         this.text = text;
         this.answer = answer;
+        isChosen=false;
     }
 }
