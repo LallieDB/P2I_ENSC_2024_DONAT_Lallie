@@ -16,7 +16,6 @@ public class ParrotScript : MonoBehaviour
     {
         //Initialisation of components and parameters
         parrotBody = GetComponent<Rigidbody2D>();
-        dodoBody=GetComponent<Rigidbody2D>();
         previousValueOfRotation=parrotBody.rotation;
         parrotDialogue=CreateParrotDialogue();
  
@@ -28,7 +27,7 @@ public class ParrotScript : MonoBehaviour
         {
             TriggerDialogue(); // If the player is close to the parrot and press P, the parrot's dialogue begin
         }
-        distance = parrotBody.position.x -dodoBody.position.x;
+        distance = dodoBody.position.x;
         
     }
     public float SetAnimator(float _previousValueOfRotation)
@@ -46,7 +45,7 @@ public class ParrotScript : MonoBehaviour
     public bool IsInRangeDialogue()
     { //function to know if the parrot is in range for the dialogue. He is in range if the euclidienne distance between the parrot and the dodo is below 3
         // A REVOIR
-        if (Math.Sqrt(Math.Pow(parrotBody.position.x -dodoBody.position.x,2) + Math.Pow(parrotBody.position.y -dodoBody.position.y,2)) <1) 
+        if (Math.Sqrt(Math.Pow(parrotBody.position.x -dodoBody.position.x,2) + Math.Pow(parrotBody.position.y -dodoBody.position.y,2)) <2) 
         {
              return true;
         }

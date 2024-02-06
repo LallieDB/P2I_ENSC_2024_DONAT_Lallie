@@ -157,9 +157,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dodoSound: {fileID: 1955336747}
-  moveSpeed: 250
   body: {fileID: 311194309}
   animator: {fileID: 311194310}
+  moveSpeed: 400
 --- !u!212 &311194306
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -22540,6 +22540,7 @@ MonoBehaviour:
     name: 
     lines: []
   previousValueOfRotation: 0
+  distance: 0
 --- !u!50 &766184841
 Rigidbody2D:
   serializedVersion: 4
