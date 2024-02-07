@@ -18,7 +18,10 @@ public class dodoMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DodoSound(); //If the player press F, play the dodo sound
+        if(Input.GetKeyDown(KeyCode.F))//If the player press F, play the dodo sound
+        {
+             dodoSound.Play();
+        } 
         MoveDodo(); //Reset the horizontal and vertical movements of the dodo
         SetAnimator(); //Set the appropriate animation for the dodo
     }
@@ -39,11 +42,11 @@ public class dodoMovement : MonoBehaviour
         animator.SetFloat("VerticalSpeed",body.velocity.y);
 
     }
-    void DodoSound()
-    {
-        if(Input.GetKeyDown(KeyCode.F))
-        {
-             dodoSound.Play();
-        }
-    }
+    // void DodoSound()
+    // {
+    //     if(Input.GetKeyDown(KeyCode.F))
+    //     {
+    //          dodoSound.Play();
+    //     }
+    // }
 }

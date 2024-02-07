@@ -25,7 +25,11 @@ public class ParrotScript : MonoBehaviour
     void Update()
     {
         previousValueOfRotation=SetAnimator(previousValueOfRotation); //Set the parrot animation
-        TriggerDialogue(); // If the player is close to the parrot and press P, the parrot's dialogue begin
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            TriggerDialogue(); // If the player is close to the parrot and press P, the parrot's dialogue begin
+        }
+        
         
         if(Input.GetKeyDown(KeyCode.D)) 
         {
@@ -100,7 +104,7 @@ public class ParrotScript : MonoBehaviour
     }
     public void TriggerDialogue()
     { // if the player is close to the parrot and press P, the dialogue is trigger
-        if ( Input.GetKeyDown(KeyCode.P) && IsInRangeDialogue()==true)
+        if ( IsInRangeDialogue()==true)
         {
             DialogueManager.instance.EndDialogue(); // close others dialogues
             Dialogue parrotDialogue=ChooseDialogue(); //choose the dialogue to display
