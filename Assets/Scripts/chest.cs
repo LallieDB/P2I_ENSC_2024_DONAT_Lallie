@@ -8,14 +8,15 @@ using UnityEngine.UI;
 
 public class chest : MonoBehaviour
 {
-    private Text interationExplanation;
+    private GameObject dialogueExplanation;
     public Animator chestAnimator;
     private bool inRange;
     // Start is called before the first frame update
     void Awake()
     {
-        interationExplanation=GameObject.Find("InteractionText").GetComponent<Text>();
-        interationExplanation.text="";
+        dialogueExplanation=GameObject.Find("DialogueInteraction");
+        dialogueExplanation.GetComponentInChildren<Text>().text="Press O to Open the chest";
+        dialogueExplanation.SetActive(false);
         inRange=false;
     }
 
@@ -30,15 +31,15 @@ public class chest : MonoBehaviour
     }
     public void OpenChest(){
         chestAnimator.SetTrigger("OpenChest");
-        GetComponent<BoxCollider2D>().enabled=true;
-        interationExplanation.enabled=true;
+        dialogueExplanation.SetActive(false);
         inRange=false;
+        this.GetComponent<BoxCollider2D>().enabled=false;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            interationExplanation.text="Press O to Open the chest";
+            dialogueExplanation.SetActive(true);
             inRange=true;
         }
     }
@@ -46,7 +47,7 @@ public class chest : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            interationExplanation.text="";
+            dialogueExplanation.SetActive(false);
             inRange=false;
         }
     }

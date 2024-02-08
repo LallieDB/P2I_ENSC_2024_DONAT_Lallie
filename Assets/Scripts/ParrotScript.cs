@@ -1,9 +1,11 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ParrotScript : MonoBehaviour
 {
+    private GameObject interactionDialogue;
     public Animator animator; //parrotAnimator
     public Rigidbody2D parrotBody;
     public Rigidbody2D dodoBody;
@@ -20,11 +22,16 @@ public class ParrotScript : MonoBehaviour
         previousValueOfRotation=parrotBody.rotation;
         normalDialogue=CreateNormalParrotDialogue();
         isHitDialogue=CreateIsHitParrotDialogue();
+        //set the interaction dialogue which is trigger when the dodo is near to the parrot
+        //interactionDialogue=GameObject.Find("DialogueInteraction");
+        //interactionDialogue.GetComponentInChildren<Text>().text="Press P to speak";
+        //interactionDialogue.SetActive(false);
  
     }
     void Update()
     {
         previousValueOfRotation=SetAnimator(previousValueOfRotation); //Set the parrot animation
+        IsInRangeDialogue();
         if(Input.GetKeyDown(KeyCode.P))
         {
             TriggerDialogue(); // If the player is close to the parrot and press P, the parrot's dialogue begin
@@ -57,8 +64,10 @@ public class ParrotScript : MonoBehaviour
     { //function to know if the parrot is in range for the dialogue. He is in range if the euclidienne distance between the parrot and the dodo is below 3
         if (Math.Sqrt(Math.Pow(parrotBody.position.x -dodoBody.position.x,2) + Math.Pow(parrotBody.position.y -dodoBody.position.y,2)) <2) 
         {
-             return true;
+            //interactionDialogue.SetActive(true);
+            return true;
         }
+        //interactionDialogue.SetActive(false);
         return false;
 
     }
