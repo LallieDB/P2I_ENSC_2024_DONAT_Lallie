@@ -22581,6 +22581,7 @@ MonoBehaviour:
     name: 
     lines: []
   parrotCollider: {fileID: 766184837}
+  isInRange: 0
   isHit: 0
   previousValueOfRotation: 0
 --- !u!50 &766184841
@@ -39696,7 +39697,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4014341313483672056, guid: 6a4bc507c2cc68643a1e55aa4d35a5bd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.51
+      value: 0.42
       objectReference: {fileID: 0}
     - target: {fileID: 4014341313483672056, guid: 6a4bc507c2cc68643a1e55aa4d35a5bd, type: 3}
       propertyPath: m_LocalPosition.z

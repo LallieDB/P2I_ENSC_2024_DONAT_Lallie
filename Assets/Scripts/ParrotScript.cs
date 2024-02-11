@@ -12,6 +12,7 @@ public class ParrotScript : MonoBehaviour
     public Dialogue normalDialogue;
     public Dialogue isHitDialogue;
     public Collider2D parrotCollider;
+    public bool isInRange;
     public bool isHit; //keep in memory if the dodo has hit the parrot. If the dodo apologize, reinitialize at zero
     public float previousValueOfRotation; //value for the rotation animation
 
@@ -23,9 +24,7 @@ public class ParrotScript : MonoBehaviour
         normalDialogue=CreateNormalParrotDialogue();
         isHitDialogue=CreateIsHitParrotDialogue();
         //set the interaction dialogue which is trigger when the dodo is near to the parrot
-        //interactionDialogue=GameObject.Find("DialogueInteraction");
-        //interactionDialogue.GetComponentInChildren<Text>().text="Press P to speak";
-        //interactionDialogue.SetActive(false);
+        interactionDialogue=GameObject.Find("DialogueInteraction");
  
     }
     void Update()
@@ -37,12 +36,6 @@ public class ParrotScript : MonoBehaviour
             TriggerDialogue(); // If the player is close to the parrot and press P, the parrot's dialogue begin
         }
         
-        
-        if(Input.GetKeyDown(KeyCode.D)) 
-        {
-            isHit=true; //waiting for a efficient method to test this
-            
-        }
     }
     void OnCollisionEnter() {
         isHit=true;
@@ -56,6 +49,7 @@ public class ParrotScript : MonoBehaviour
         if (Math.Abs(valueOfActualRotation)%360 >= 50 || Math.Abs(valueOfActualRotation)%360 >= 310 || Math.Abs(valueOfActualRotation - previousValueOfRotation) >10)
         {
             rotate=true; //we want the parrot animation with the stars
+            isHit=true; //the parrot is hit by the dodo
         }
         animator.SetBool("isHit", rotate); //we set the value of rotation to the animator
         return parrotBody.rotation;
@@ -64,10 +58,16 @@ public class ParrotScript : MonoBehaviour
     { //function to know if the parrot is in range for the dialogue. He is in range if the euclidienne distance between the parrot and the dodo is below 3
         if (Math.Sqrt(Math.Pow(parrotBody.position.x -dodoBody.position.x,2) + Math.Pow(parrotBody.position.y -dodoBody.position.y,2)) <2) 
         {
-            //interactionDialogue.SetActive(true);
+            interactionDialogue.GetComponentInChildren<Text>().text="Press P to speak";
+            isInRange=true;
             return true;
         }
-        //interactionDialogue.SetActive(false);
+        else if(isInRange==true) //if the player just quit the range, we end the interaction dialogue text
+        {
+            interactionDialogue.GetComponentInChildren<Text>().text="";
+            isInRange=false;
+            DialogueManager.instance.EndDialogue();
+        }
         return false;
 
     }

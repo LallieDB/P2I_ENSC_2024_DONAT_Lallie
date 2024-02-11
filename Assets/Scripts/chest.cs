@@ -15,8 +15,7 @@ public class chest : MonoBehaviour
     void Awake()
     {
         dialogueExplanation=GameObject.Find("DialogueInteraction");
-        dialogueExplanation.GetComponentInChildren<Text>().text="Press O to Open the chest";
-        dialogueExplanation.SetActive(false);
+        dialogueExplanation.GetComponentInChildren<Text>().text="";
         inRange=false;
     }
 
@@ -31,7 +30,7 @@ public class chest : MonoBehaviour
     }
     public void OpenChest(){
         chestAnimator.SetTrigger("OpenChest");
-        dialogueExplanation.SetActive(false);
+        dialogueExplanation.GetComponentInChildren<Text>().text="";
         inRange=false;
         this.GetComponent<BoxCollider2D>().enabled=false;
     }
@@ -39,7 +38,7 @@ public class chest : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            dialogueExplanation.SetActive(true);
+            dialogueExplanation.GetComponentInChildren<Text>().text="Press O to open the chest";
             inRange=true;
         }
     }
@@ -47,7 +46,7 @@ public class chest : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            dialogueExplanation.SetActive(false);
+            dialogueExplanation.GetComponentInChildren<Text>().text="";
             inRange=false;
         }
     }
