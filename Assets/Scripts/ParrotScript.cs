@@ -11,7 +11,6 @@ public class ParrotScript : MonoBehaviour
     public Rigidbody2D dodoBody;
     public Dialogue normalDialogue;
     public Dialogue isHitDialogue;
-    public Collider2D parrotCollider;
     public bool isInRange;
     public bool isHit; //keep in memory if the dodo has hit the parrot. If the dodo apologize, reinitialize at zero
     public float previousValueOfRotation; //value for the rotation animation
@@ -37,10 +36,7 @@ public class ParrotScript : MonoBehaviour
         }
         
     }
-    void OnCollisionEnter() {
-        isHit=true;
-        Debug.Log("Collision : " + gameObject.name);
-    }
+
     public float SetAnimator(float _previousValueOfRotation)
     {
         bool rotate =false; //booleen that returns false if the parrot should not rotate, true if he rotates
