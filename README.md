@@ -23,7 +23,9 @@ Cette version git comporte :
 - le dodo pousse un cri lorsque la touche F est appuyée
 - 2 personnages non jouables : un perroquet qu'on peut faire tourner et une plante avec une tête de perroquet qui empêche au dodo d'accéder à la partie Nord de l'île
 - Incorporation de dialogues à choix à l'aide d'une classe Dialogue et du script DialogueManager.
-- On peut parler au perroquet à l'aide de la touche P
+- On peut parler au perroquet à l'aide de la touche P. Le perroquet a deux dialogues différents : un dialogue de base et un second qui s'active si on le pousse. Si on s'excuse dans le deuxième dialogue, le premier dialogue revient.
+- Deux coffres au trésor que l'on peut ouvrir en appuyant sur la touche O.
+- Des messages dans la console qui s'activent à proximité des coffres et des personnages pour dire au joueur quelle touche il faut qu'il appuie pour interagir avec le décor.
 
 ### Animations
 Le dodo a une animation de déplacement par direction de déplacement (haut, bas, droite, gauche)
