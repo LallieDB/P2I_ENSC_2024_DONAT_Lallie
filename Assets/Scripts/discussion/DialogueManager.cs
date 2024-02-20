@@ -1,8 +1,7 @@
-using System;
-using System.Collections;
-using TMPro;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Windows;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -14,6 +13,7 @@ public class DialogueManager : MonoBehaviour
     public Button nextButton;
 
     private Dialogue currentDialogue;
+    private DialogueLine currentDialogueLine;
     private int currentLineIndex = 0;
 
     //Allow to use easily DialogueManager method in other scripts
@@ -34,6 +34,7 @@ public class DialogueManager : MonoBehaviour
         // You can load your dialogue data from an external source (e.g., JSON, XML) or create it programmatically.
         // For simplicity, we'll create a sample dialogue here.
         currentDialogue = CreateSampleDialogue();
+        currentDialogueLine = currentDialogue.lines[0];
 
         // Set up event listeners for buttons
         choice1Button.onClick.AddListener(OnChoice1Selected);
@@ -48,6 +49,7 @@ public class DialogueManager : MonoBehaviour
     {
         //change the dialogue to read
         currentDialogue = _newdialogue;
+        currentDialogueLine = currentDialogue.lines[0];
     }
 
     public void StartDialogue()
@@ -59,6 +61,7 @@ public class DialogueManager : MonoBehaviour
 
     private void DisplayLine(DialogueLine line)
     {
+        currentDialogueLine = line;
         nameText.text = currentDialogue.name;
         dialogueText.text = line.text;
         choice1Button.gameObject.SetActive(line.hasChoice); //show the choice button1 if there is a choice
@@ -66,8 +69,8 @@ public class DialogueManager : MonoBehaviour
         nextButton.gameObject.SetActive(!line.hasChoice); //show the next button if there is not a choice
         if (line.hasChoice == true) //set the text of the choice buttons
         {
-            choice1Button.GetComponentInChildren<Text>().text = currentDialogue.lines[currentLineIndex].choice1.text;
-            choice2Button.GetComponentInChildren<Text>().text = currentDialogue.lines[currentLineIndex].choice2.text;
+            choice1Button.GetComponentInChildren<Text>().text = line.choice1.text;
+            choice2Button.GetComponentInChildren<Text>().text = line.choice2.text;
         }
     }
 
@@ -88,14 +91,14 @@ public class DialogueManager : MonoBehaviour
 
     private void OnChoice1Selected()
     {
-        currentDialogue.lines[currentLineIndex].choice1.isChosen=true; //set that the choice 1 is chosen
-        HandleChoice(currentDialogue.lines[currentLineIndex].choice1); //continue the dialogue
+        currentDialogueLine.choice1.isChosen = true; //set that the choice 1 is chosen
+        HandleChoice(currentDialogueLine.choice1); //continue the dialogue
     }
 
     private void OnChoice2Selected()
     {
-        currentDialogue.lines[currentLineIndex].choice2.isChosen=true; //set that the choice 2 is chosen
-        HandleChoice(currentDialogue.lines[currentLineIndex].choice2);//continue the dialogue
+        currentDialogueLine.choice2.isChosen = true; //set that the choice 2 is chosen
+        HandleChoice(currentDialogueLine.choice2); //continue the dialogue
     }
 
     private void HandleChoice(Choice choice)
@@ -128,7 +131,40 @@ public class DialogueManager : MonoBehaviour
                 true,
                 new Choice(
                     "I can't fly...",
-                    new DialogueLine("Find some or you're gonna die !", false)
+                    new DialogueLine(
+                        "Find some or you're gonna die !",
+                        true,
+                        new Choice(
+                            "I don't wanna die",
+                            new DialogueLine(
+                                "That's pretty commun. But you should be aware that humans LOVE dodo.",
+                                false
+                            )
+                        ),
+                        new Choice(
+                            "I wanna die",
+                            new DialogueLine(
+                                "That's original. I suppose you should be happy, then.",
+                                true,
+                                new Choice(
+                                    "I am unique",
+                                    new DialogueLine(
+                                        "Fine. I suppose you should be happy, then.",
+                                        false
+                                    )
+                                ),
+                                new Choice(
+                                    "I am so sad...",
+                                    new DialogueLine(
+                                        "Oh....... Well, I guess it doesn't matter to you, but...",
+                                        true,
+                                        new Choice("hhh", new DialogueLine("eeee", false)),
+                                        new Choice("22", new DialogueLine("222", false))
+                                    )
+                                )
+                            )
+                        )
+                    )
                 ),
                 new Choice(
                     "I want to stay here",
@@ -138,11 +174,13 @@ public class DialogueManager : MonoBehaviour
                     )
                 )
             ),
-            new DialogueLine("Humans EAT dodo.", false)
+            new DialogueLine("Humans EAT dodo.", false),
         };
         return dialogue;
     }
 }
+
+//Implementation of the classes of this system
 
 [System.Serializable]
 public class Dialogue
@@ -161,10 +199,39 @@ public class DialogueLine
 
     public DialogueLine(string text, bool hasChoice, Choice choice1 = null, Choice choice2 = null)
     {
+        //verification that there are two choices if the dialogueline is declared as having choices
+        if (choice1 == null || choice2 == null)
+        {
+            hasChoice = false;
+        }
+        //verification that we don't have more than 2 successive choices
+        else if (choice1 != null && choice1.answer.hasChoice == true)
+        { // if the first choice has two choices, then those choices don't have choice
+            HasChoiceWhenItShouldnt(choice1.answer.choice1);
+            HasChoiceWhenItShouldnt(choice1.answer.choice2);
+        }
+        if (choice2 != null && choice2.answer.hasChoice == true)
+        { // if the second choice has two choices, then those choices don't have choice
+            HasChoiceWhenItShouldnt(choice2.answer.choice1);
+            HasChoiceWhenItShouldnt(choice2.answer.choice2);
+        }
+
         this.text = text;
         this.hasChoice = hasChoice;
         this.choice1 = choice1;
         this.choice2 = choice2;
+    }
+
+    public void HasChoiceWhenItShouldnt(Choice choice)
+    { //this method take a choice and if this choice has more choice, then those and their following
+        // are not selected anymore and a message is display to prevent the programmer than there is a change in his dialogues
+        if (choice.answer.hasChoice == true)
+        {
+            choice.answer.hasChoice = false;
+            Debug.Log(
+                "A dialogue choice is not selectable to avoid surcharging the system. Consider changing your dialoguelines"
+            );
+        }
     }
 }
 
@@ -172,15 +239,13 @@ public class DialogueLine
 public class Choice
 {
     public string text;
-
     public bool isChosen;
     public DialogueLine answer;
 
-    
     public Choice(string text, DialogueLine answer)
     {
         this.text = text;
         this.answer = answer;
-        isChosen=false;
+        isChosen = false;
     }
 }
