@@ -9,20 +9,21 @@ public class Inventory : MonoBehaviour
     private InventoryData data;
     public void Awake()
     {
-        display.Initialization();
-        data=new InventoryData();
-
+        int slotcount=display.Initialization();
+        data=new InventoryData(slotcount);
     }
-
-}
-public class InventoryDisplay : MonoBehaviour{
-    private Slot[] slots;
-    public void Initialization()
+    public Item AddItem(Item _item)
     {
-        // slots=GetComponentInChildren
+        if (!data.IsSlotAvailable(_item)) return _item;
+        _item=data.AddItem(_item);
+        display.UpdateDisplay(data.items);
+        return _item;
     }
-}
-
-public class InventoryData{
+    public Item PickItem(int _slotID)
+    {
+        Item _choosenItem= data.PickItem(_slotID);
+        display.UpdateDisplay(data.items);
+        return _choosenItem;
+    }
 
 }
