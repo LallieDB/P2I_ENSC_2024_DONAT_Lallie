@@ -22993,6 +22993,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 802442800}
+  - component: {fileID: 802442801}
   m_Layer: 0
   m_Name: Inventory
   m_TagString: Untagged
@@ -23016,6 +23017,19 @@ Transform:
   - {fileID: 840962603}
   m_Father: {fileID: 371094519}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &802442801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802442799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 962a59434abca5b49818062d8386a3ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  display: {fileID: 840962607}
 --- !u!1 &803025697
 GameObject:
   m_ObjectHideFlags: 0

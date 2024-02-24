@@ -3,5 +3,5 @@ using UnityEngine;
 
 public class ItemData : ScriptableObject
 {
-
+    public int stackMaxCount=1;
 }

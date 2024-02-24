@@ -15,7 +15,7 @@ public class Inventory : MonoBehaviour
     public Item AddItem(Item _item)
     {
         if (!data.IsSlotAvailable(_item)) return _item;
-        _item=data.AddItem(_item);
+        data.AddItem(ref _item);
         display.UpdateDisplay(data.items);
         return _item;
     }
