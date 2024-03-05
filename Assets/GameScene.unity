@@ -22994,6 +22994,7 @@ GameObject:
   m_Component:
   - component: {fileID: 802442800}
   - component: {fileID: 802442801}
+  - component: {fileID: 802442802}
   m_Layer: 0
   m_Name: Inventory
   m_TagString: Untagged
@@ -23030,6 +23031,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   display: {fileID: 840962607}
+--- !u!114 &802442802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802442799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49a116eab59f5cf49bb704aa4f770f97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemToPush:
+    count: 10
+    data: {fileID: 11400000, guid: b28d77bf6cc238e44b4a9835c87e6d68, type: 2}
+  pickedItem:
+    count: 0
+    data: {fileID: 0}
 --- !u!1 &803025697
 GameObject:
   m_ObjectHideFlags: 0

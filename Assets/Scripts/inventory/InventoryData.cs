@@ -38,7 +38,6 @@ public class InventoryData
                 items[i].Merge(ref _item);
             }
         }
-        return;
     }
 
     public Item PickItem(int _slotId)

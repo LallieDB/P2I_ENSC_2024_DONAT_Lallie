@@ -3,5 +3,7 @@ using UnityEngine;
 
 public class ItemData : ScriptableObject
 {
-    public int stackMaxCount=1;
+    [SerializeField] public string ItemName;
+    [SerializeField] public int stackMaxCount;
+    [SerializeField] public Sprite icon;
 }

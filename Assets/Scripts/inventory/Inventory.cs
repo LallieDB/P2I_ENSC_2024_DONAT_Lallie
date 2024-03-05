@@ -1,16 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private InventoryDisplay display;
-    private InventoryData data;
+    [SerializeField] private InventoryData data;
     public void Awake()
     {
         int slotcount=display.Initialization();
         data=new InventoryData(slotcount);
+        display.UpdateDisplay(data.items);
     }
     public Item AddItem(Item _item)
     {
