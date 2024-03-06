@@ -3,7 +3,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private InventoryDisplay display;
-    [SerializeField] private InventoryData data;
+    private InventoryData data;
     public void Awake()
     {
         int slotcount=display.Initialization();

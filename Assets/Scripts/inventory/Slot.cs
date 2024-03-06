@@ -8,8 +8,11 @@ public class Slot : MonoBehaviour
     [SerializeField] private Image itemImage;
     private int index;
     private InventoryDisplay inventoryDisplay;
+    private Button button;
     public void Initialize( InventoryDisplay _inventoryDisplay, int _index)
     {
+        button=GetComponent<Button>();
+        button.onClick.AddListener(OnClick);
         index=_index;
         inventoryDisplay=_inventoryDisplay;
     }
@@ -26,5 +29,8 @@ public class Slot : MonoBehaviour
         itemImage.sprite=null;
         itemImage.color= new Color(0,0,0,0);
 
+    }
+    private void OnClick(){
+        inventoryDisplay.OnClickSlot(index);
     }
 }

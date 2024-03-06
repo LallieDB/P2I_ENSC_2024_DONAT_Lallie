@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 public class InventoryDisplay : MonoBehaviour{
@@ -22,5 +19,9 @@ public class InventoryDisplay : MonoBehaviour{
             slots[i].UpdateDisplay(_currentItems[i]);
         }
 
+    }
+    public void OnClickSlot(int _index)
+    {
+        Debug.Log($"Click on slot : {_index}");
     }
 }

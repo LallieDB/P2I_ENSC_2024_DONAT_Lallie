@@ -1,14 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Timeline.Actions;
-using UnityEngine;
-
-[System.Serializable]
 public class InventoryData
 {
-    [field: SerializeField] public Item[] items { get; private set; }
+    public Item[] items { get; private set; }
 
     public InventoryData(int _slotCount)
     {
