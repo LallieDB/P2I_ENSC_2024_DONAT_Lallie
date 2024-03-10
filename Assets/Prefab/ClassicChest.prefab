@@ -166,3 +166,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chestAnimator: {fileID: 3467507530058912008}
+  poisonBottle:
+    count: 0
+    data: {fileID: 11400000, guid: b28d77bf6cc238e44b4a9835c87e6d68, type: 2}

@@ -11,20 +11,25 @@ public class chest : MonoBehaviour
     private GameObject dialogueExplanation;
     public Animator chestAnimator;
     private bool inRange;
+    public Item poisonBottle;
+    private Inventory inventory;
     // Start is called before the first frame update
     void Awake()
     {
         dialogueExplanation=GameObject.Find("DialogueInteraction");
         dialogueExplanation.GetComponentInChildren<Text>().text="";
         inRange=false;
-    }
+        inventory=FindObjectOfType<Inventory>();
 
+    }
+    
     // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.O) && inRange==true)
         {
             OpenChest();
+            inventory.AddItem(poisonBottle);
         }
         
     }
@@ -33,6 +38,7 @@ public class chest : MonoBehaviour
         dialogueExplanation.GetComponentInChildren<Text>().text="";
         inRange=false;
         this.GetComponent<BoxCollider2D>().enabled=false;
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

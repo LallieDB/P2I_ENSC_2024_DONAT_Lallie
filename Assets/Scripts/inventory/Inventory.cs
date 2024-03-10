@@ -10,7 +10,7 @@ public class Inventory : MonoBehaviour
         data=new InventoryData(slotcount);
         display.UpdateDisplay(data.items);
     }
-    public Item AddItem(Item _item)
+    public Item AddItem( Item _item)
     {
         if (!data.IsSlotAvailable(_item)) return _item;
         data.AddItem(ref _item);

@@ -1,5 +1,6 @@
 public class InventoryData
 {
+    public static InventoryData instance;
     public Item[] items { get; private set; }
 
     public InventoryData(int _slotCount)
