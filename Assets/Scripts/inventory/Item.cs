@@ -27,6 +27,7 @@ public struct Item
 
     // Search if the item can be stock in the slot emplacement
     public bool AvailableFor(Item _item) => Empty || (Data ==_item.data && !Full) ;
+    public bool IsItem(Item _item) => Data ==_item.data;
 
     public ItemData Data => data;
     public bool Full => data && count >= data.stackMaxCount;

@@ -10,19 +10,22 @@ public class PlantScript : MonoBehaviour
     private GameObject interactionDialogue;
     private GameObject questIcon;
     private GameObject plant;
-    private Dialogue plantDialogue;
     public Rigidbody2D dodoBody;
     public Rigidbody2D plantBody;
+    private Inventory inventory;
+    private Dialogue plantDialogue;
+    public Item poisonBottle;
     public bool isInRange;
     public bool acceptQuest;
     // Start is called before the first frame update
     void Start()
-    {   //assignation of the GameObject
+    {   //assignation of GameObject
         questIcon=GameObject.Find("quest_icon");
         interactionDialogue=GameObject.Find("DialogueInteraction");
         plant=GameObject.Find("Plant");
-        //Assignation of beginning dialogue and booleens
+        //Assignation of the first dialogue, inventory and booleans
         plantDialogue=CreatePlantDialogue();
+        inventory=FindObjectOfType<Inventory>();
         isInRange=false;
         acceptQuest=false;
     }
@@ -45,11 +48,18 @@ public class PlantScript : MonoBehaviour
         //if the player succeed at the quest, the plant disappear
         else if( acceptQuest==true && plantDialogue.lines[1].choice1.isChosen==true)
         {
+            HasWater();
+        }
+        
+    }
+    private void HasWater()
+    {
+        if (inventory.FindAndPickItem(poisonBottle)==true)
+        { 
             Destroy(plant);
             Destroy(plantBody);
             interactionDialogue.GetComponentInChildren<Text>().text="";
         }
-        
     }
     private bool IsInRangeDialogue()
     { //function to know if the parrot is in range for the dialogue. He is in range if the euclidienne distance between the parrot and the dodo is below 3

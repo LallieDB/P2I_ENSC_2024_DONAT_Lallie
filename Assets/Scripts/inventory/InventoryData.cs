@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 public class InventoryData
 {
     public static InventoryData instance;
@@ -41,5 +43,29 @@ public class InventoryData
         items[_slotId]=new Item(); //reinitialize the slot where the item is taken
         return _itemPick;
 
+    }
+    public bool HasItem(Item _itemToSearch)
+    {
+        for(int i=0; i<items.Length;i++)
+        {
+            if(items[i].IsItem(_itemToSearch))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public int FindItem(Item _itemToSearch)
+    { //method that search an specific item in the inventory
+    //return the SlotID of this item if he finds one
+    //if he does not find an item, return the a number superieur of the slotID
+        for(int i=0; i<items.Length;i++)
+        {
+            if(items[i].IsItem(_itemToSearch))
+            {
+                return i;
+            }
+        }
+        throw new System.Exception($"the item {_itemToSearch} is out of inventory");
     }
 }

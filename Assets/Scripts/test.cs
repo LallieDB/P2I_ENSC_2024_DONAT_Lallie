@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class test : MonoBehaviour
 {
-    [SerializeField] private Item itemToPush, pickedItem;
+    [SerializeField] private Item itemToPush, itemToSearch, pickedItem;
+    private bool IsFind;
     private Inventory inventory;
     void Awake(){
         inventory=FindObjectOfType<Inventory>();
@@ -19,6 +20,11 @@ public class test : MonoBehaviour
     [ContextMenu("Picked")]
     private void Pick() 
     {
-        pickedItem=inventory.PickItem(11);
+        pickedItem=inventory.PickItem(1);
+    }
+    [ContextMenu("Search")]
+    private void Search() 
+    {
+        IsFind=inventory.FindAndPickItem(itemToSearch);
     }
 }

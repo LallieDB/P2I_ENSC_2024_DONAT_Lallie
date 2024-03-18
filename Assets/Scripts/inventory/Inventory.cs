@@ -24,4 +24,22 @@ public class Inventory : MonoBehaviour
         return _choosenItem;
     }
 
+    public bool FindAndPickItem(Item _item)
+    { //function to search if a item is in the inventory a,d to pick it if this is the case
+    //if the item is find and pick, it returns true
+    //if the item is not in the inventory, it returns false
+    if (data.HasItem(_item)==true)
+    {
+        int _slotOfSearchedItem=data.FindItem(_item);
+    
+        PickItem(_slotOfSearchedItem);
+        Debug.Log($"the item is in the slot : {_slotOfSearchedItem} ");
+        return true;
+
+
+    }
+    Debug.Log("No item was found");
+    return false;
+    }
+
 }
