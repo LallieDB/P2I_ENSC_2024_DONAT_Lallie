@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemName: Bouteille
   stackMaxCount: 5
-  icon: {fileID: 0}
+  icon: {fileID: 579450718, guid: 532cdb9a9a41a574c9b11b2f13f1fdd9, type: 3}
