@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +14,7 @@ public class PlantScript : MonoBehaviour
     public Item poisonBottle;
     public bool isInRange;
     public bool acceptQuest;
+    public bool playerHasWater;
     // Start is called before the first frame update
     void Start()
     {   //assignation of GameObject
@@ -28,6 +26,7 @@ public class PlantScript : MonoBehaviour
         inventory=FindObjectOfType<Inventory>();
         isInRange=false;
         acceptQuest=false;
+        playerHasWater=false;
     }
 
     // Update is called once per frame
@@ -42,11 +41,20 @@ public class PlantScript : MonoBehaviour
         if (acceptQuest==false && plantDialogue.lines[1].choice1.isChosen==true)
         {
             acceptQuest=true;
-            plantDialogue=PlantWaitingWaterDialogue();
             questIcon.SetActive(false);
+            plantDialogue=PlantWatitingForWaterAndYouDoNotHaveWater();
         }
-        //if the player succeed at the quest, the plant disappear
-        else if( acceptQuest==true && plantDialogue.lines[1].choice1.isChosen==true)
+        //if the player have accepted the quest and picks the poison bottle, the dialogue changes
+        if(acceptQuest==true && playerHasWater==false)
+        {
+            if (inventory.IsItemInInventory(poisonBottle)==true)
+            {
+                plantDialogue=PlantWaitingWaterDialogueAndYouHaveWater();
+                playerHasWater=true;
+            }
+        }
+        //if the player give the poison bottle at the plant, he succeds at the quest, the plant disappear
+        if( acceptQuest==true && playerHasWater==true && plantDialogue.lines[1].choice1.isChosen==true)
         {
             HasWater();
         }
@@ -102,7 +110,7 @@ public class PlantScript : MonoBehaviour
         };
         return dialogue;
     }
-    private Dialogue PlantWaitingWaterDialogue()
+    private Dialogue PlantWaitingWaterDialogueAndYouHaveWater()
     { //Creation of the dialogue when the player accept the quest of the parrot plant
         Dialogue dialogue = new Dialogue();
         dialogue.name = "Plant";
@@ -111,6 +119,20 @@ public class PlantScript : MonoBehaviour
             new DialogueLine("Hello again nice bird !",false),
             new DialogueLine("Do you have water ?",true, 
             new Choice("Yes", new DialogueLine("Thank you so much ! Oh, but why me leafs deplenished so fast ?!?!?!?!", false)), new Choice("No", new DialogueLine("Hurry !", false))),
+        };
+        return dialogue;
+
+    }
+    private Dialogue PlantWatitingForWaterAndYouDoNotHaveWater()
+    {
+        //Creation of the dialogue when the player accept the quest of the parrot plant
+        Dialogue dialogue = new Dialogue();
+        dialogue.name = "Plant";
+        dialogue.lines = new DialogueLine[]
+        {
+            new DialogueLine("Hello again nice bird !",false),
+            new DialogueLine("Do you have water ?",true, 
+            new Choice("Yes", new DialogueLine("LIAR !!!!", false)), new Choice("No", new DialogueLine("Hurry !", false))),
         };
         return dialogue;
 

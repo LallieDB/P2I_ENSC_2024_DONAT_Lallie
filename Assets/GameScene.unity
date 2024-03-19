@@ -22707,6 +22707,9 @@ MonoBehaviour:
   itemToPush:
     count: 1
     data: {fileID: 11400000, guid: 263599d555c24f24bb52c2a6c04770d0, type: 2}
+  itemToSearch:
+    count: 0
+    data: {fileID: 0}
   pickedItem:
     count: 0
     data: {fileID: 0}
@@ -22860,9 +22863,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e4615963adc2444484a411d6b7c2b94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questIcon: {fileID: 2012175453}
   dodoBody: {fileID: 311194309}
   plantBody: {fileID: 803025702}
+  poisonBottle:
+    count: 1
+    data: {fileID: 11400000, guid: 263599d555c24f24bb52c2a6c04770d0, type: 2}
   isInRange: 0
   acceptQuest: 0
 --- !u!50 &803025702
