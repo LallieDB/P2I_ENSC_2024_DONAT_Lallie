@@ -42,11 +42,4 @@ public class dodoMovement : MonoBehaviour
         animator.SetFloat("VerticalSpeed",body.velocity.y);
 
     }
-    // void DodoSound()
-    // {
-    //     if(Input.GetKeyDown(KeyCode.F))
-    //     {
-    //          dodoSound.Play();
-    //     }
-    // }
 }
