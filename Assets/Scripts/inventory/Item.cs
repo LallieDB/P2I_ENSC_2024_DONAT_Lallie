@@ -24,7 +24,14 @@ public struct Item
         count=data.stackMaxCount;
         _itemToMerge.count=_total - count;
     }
-
+    public Item OneLessCount() {
+        if(count>1)
+        {
+            count=count-1;
+        }
+        return this;
+    } 
+ 
     // Search if the item can be stock in the slot emplacement
     public bool AvailableFor(Item _item) => Empty || (Data ==_item.data && !Full) ;
     public bool IsItem(Item _item) => Data ==_item.data;

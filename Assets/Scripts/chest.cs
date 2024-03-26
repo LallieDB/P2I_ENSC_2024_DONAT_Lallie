@@ -20,7 +20,6 @@ public class chest : MonoBehaviour
         dialogueExplanation.GetComponentInChildren<Text>().text="";
         inRange=false;
         inventory=FindObjectOfType<Inventory>();
-
     }
     
     // Update is called once per frame

@@ -6,13 +6,16 @@ public class dodoMovement : MonoBehaviour
     public AudioSource dodoSound;
     public Rigidbody2D body;
     public Animator animator;
+    public Item intialEggs;
+    private Inventory inventory;
     private Vector3 velocity = Vector3.zero;
     public float moveSpeed;
 
      // Start is called before the first frame update
     void Start()
     {
-        
+        inventory=FindObjectOfType<Inventory>();
+        inventory.AddItem(intialEggs);
     }
 
     // Update is called once per frame
@@ -24,6 +27,16 @@ public class dodoMovement : MonoBehaviour
         } 
         MoveDodo(); //Reset the horizontal and vertical movements of the dodo
         SetAnimator(); //Set the appropriate animation for the dodo
+
+        //if the player press O and he has an egg in is inventory, he eats it and gains speed
+        if(Input.GetKeyDown(KeyCode.O))
+        {
+            if(inventory.IsItemInInventory(intialEggs))
+            {
+                inventory.FindAndPickItem(intialEggs);
+                moveSpeed=moveSpeed*1.2f;
+            }
+        }
     }
     void MoveDodo()
     {

@@ -261,6 +261,9 @@ MonoBehaviour:
   dodoSound: {fileID: 1955336747}
   body: {fileID: 311194309}
   animator: {fileID: 311194310}
+  intialEggs:
+    count: 4
+    data: {fileID: 11400000, guid: 3e8a7885dd9f53f4b9f01722bf0b4d6c, type: 2}
   moveSpeed: 400
 --- !u!212 &311194306
 SpriteRenderer:
@@ -3941,7 +3944,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.90188676, g: 0.8831684, b: 0.8831684, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -22870,6 +22873,7 @@ MonoBehaviour:
     data: {fileID: 11400000, guid: 263599d555c24f24bb52c2a6c04770d0, type: 2}
   isInRange: 0
   acceptQuest: 0
+  playerHasWater: 0
 --- !u!50 &803025702
 Rigidbody2D:
   serializedVersion: 4
@@ -24006,7 +24010,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 430.57153, y: 148.51518}
+  m_AnchoredPosition: {x: 410.5715, y: 200.5152}
   m_SizeDelta: {x: 103.1109, y: 52.7589}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1220309005
@@ -41069,7 +41073,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 1450134814}
   - {fileID: 311194307}
+  - {fileID: 1319733333}
   - {fileID: 2126967627}
   - {fileID: 371094519}
   - {fileID: 992987842}
-  - {fileID: 1319733333}

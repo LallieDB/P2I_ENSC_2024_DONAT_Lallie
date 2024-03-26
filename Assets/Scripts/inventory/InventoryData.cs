@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Threading;
 
 public class InventoryData
 {
@@ -39,10 +40,17 @@ public class InventoryData
     {
         if(_slotId> items.Length)
             throw new System.Exception($"id {_slotId} is out of inventory");
-        Item _itemPick=items[_slotId]; //stock the item pick
-        items[_slotId]=new Item(); //reinitialize the slot where the item is taken
-        return _itemPick;
+        if(items[_slotId].Count>1)
+        {
+            Item _itemPickLessOne=items[_slotId].OneLessCount(); //stock the item pick
+            items[_slotId]=new Item(); //reinitialize the slot where the item is taken
+            items[_slotId].Merge(ref _itemPickLessOne);
+            return _itemPickLessOne;
+        }
 
+        Item _itemPick=items[_slotId]; //stock the item pick
+        items[_slotId]=new Item();
+        return _itemPick;
     }
     public bool HasItem(Item _itemToSearch)
     {

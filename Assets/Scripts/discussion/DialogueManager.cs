@@ -1,7 +1,5 @@
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Windows;
 
 public class DialogueManager : MonoBehaviour
 {
