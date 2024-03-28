@@ -11,48 +11,48 @@ public class dodoMovement : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
     public float moveSpeed;
 
-     // Start is called before the first frame update
+    // Start is called before the first frame update
     void Start()
     {
-        inventory=FindObjectOfType<Inventory>();
+        inventory = FindObjectOfType<Inventory>();
         inventory.AddItem(intialEggs);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F))//If the player press F, play the dodo sound
+        if (Input.GetKeyDown(KeyCode.F)) //If the player press F, play the dodo sound
         {
-             dodoSound.Play();
-        } 
+            dodoSound.Play();
+        }
         MoveDodo(); //Reset the horizontal and vertical movements of the dodo
         SetAnimator(); //Set the appropriate animation for the dodo
 
         //if the player press O and he has an egg in is inventory, he eats it and gains speed
-        if(Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            if(inventory.IsItemInInventory(intialEggs))
+            if (inventory.IsItemInInventory(intialEggs))
             {
                 inventory.FindAndPickItem(intialEggs);
-                moveSpeed=moveSpeed*1.2f;
+                moveSpeed = moveSpeed * 1.2f;
             }
         }
     }
+
     void MoveDodo()
     {
         //Set the vertical and horizontal movements
-        float horizontalMovement = Input.GetAxis("Horizontal")*moveSpeed*Time.deltaTime;
-        float verticalMovement = Input.GetAxis("Vertical")*moveSpeed*Time.deltaTime;
-        Vector3 targetVelocity =new Vector2(horizontalMovement, verticalMovement);
+        float horizontalMovement = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
+        float verticalMovement = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
+        Vector3 targetVelocity = new Vector2(horizontalMovement, verticalMovement);
         //Make the transition with the current dodo's velocity
-        body.velocity=Vector3.SmoothDamp(body.velocity, targetVelocity, ref velocity, .05f);
-        
+        body.velocity = Vector3.SmoothDamp(body.velocity, targetVelocity, ref velocity, .05f);
     }
+
     void SetAnimator()
     {
         //Give the horizontal and vertical velocity to the animator
-        animator.SetFloat("HorizontalSpeed",body.velocity.x);
-        animator.SetFloat("VerticalSpeed",body.velocity.y);
-
+        animator.SetFloat("HorizontalSpeed", body.velocity.x);
+        animator.SetFloat("VerticalSpeed", body.velocity.y);
     }
 }

@@ -26786,9 +26786,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AssetsPPU: 35
-  m_RefResolutionX: 320
-  m_RefResolutionY: 180
+  m_AssetsPPU: 60
+  m_RefResolutionX: 720
+  m_RefResolutionY: 240
   m_UpscaleRT: 1
   m_PixelSnapping: 0
   m_CropFrameX: 0
@@ -27099,7 +27099,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 750d89a92a76df14db69d78f12efefd1, type: 3}
-  m_Color: {r: 1, g: 0.98427427, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.9843137, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -27107,7 +27107,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 2
   m_SpriteSortPoint: 0
 --- !u!222 &2012175456
 CanvasRenderer:
