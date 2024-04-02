@@ -1,9 +1,9 @@
 [System.Serializable]
 public class Choice
 {
-    public string text;
-    public bool isChosen;
-    public DialogueLine answer;
+    public string text; // the text of the chosen option
+    public bool isChosen; // if the option is chosen vy the player
+    public DialogueLine answer; //the next line if you choose this choice
 
     public Choice(string text, DialogueLine answer)
     {

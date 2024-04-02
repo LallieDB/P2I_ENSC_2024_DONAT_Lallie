@@ -12,7 +12,7 @@ public class InventoryData
     }
 
     public bool IsSlotAvailable(Item _itemToAdd)
-    {
+    { //method that search if one slot is available to add an item
         foreach(var item in items)
         {
             if(item.AvailableFor(_itemToAdd))
@@ -24,7 +24,7 @@ public class InventoryData
     }
 
     public void AddItem(ref Item _item)
-    {
+    {//method to add the item in parameter
         for(int i=0; i<items.Length;i++)
         {
             if(_item.Empty)
@@ -38,8 +38,11 @@ public class InventoryData
 
     public Item PickItem(int _slotId)
     {
+        //method to pick one item in the slotID given in parameter
+        
         if(_slotId> items.Length)
             throw new System.Exception($"id {_slotId} is out of inventory");
+        //if there are more than one item in the slot, we just take one item
         if(items[_slotId].Count>1)
         {
             Item _itemPickLessOne=items[_slotId].OneLessCount(); //stock the item pick
@@ -53,7 +56,7 @@ public class InventoryData
         return _itemPick;
     }
     public bool HasItem(Item _itemToSearch)
-    {
+    {//method that search if one item is in the inventory
         for(int i=0; i<items.Length;i++)
         {
             if(items[i].IsItem(_itemToSearch))

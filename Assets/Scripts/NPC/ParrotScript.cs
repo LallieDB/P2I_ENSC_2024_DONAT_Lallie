@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,7 +28,7 @@ public class ParrotScript : MonoBehaviour
     void Update()
     {
         previousValueOfRotation=SetAnimator(previousValueOfRotation); //Set the parrot animation
-        IsInRangeDialogue();
+        IsInRangeDialogue(); //update if the dodo is in range or not
         if(Input.GetKeyDown(KeyCode.P))
         {
             TriggerDialogue(); // If the player is close to the parrot and press P, the parrot's dialogue begin
@@ -38,7 +37,8 @@ public class ParrotScript : MonoBehaviour
     }
 
     public float SetAnimator(float _previousValueOfRotation)
-    {
+    { //method that set the dodo's animator depending of the dodo rotation
+
         bool rotate =false; //booleen that returns false if the parrot should not rotate, true if he rotates
         float valueOfActualRotation = parrotBody.rotation;
         //We look if the rotation of the parrot between -50 and 50 degree or if he does not rotates too fast
@@ -68,7 +68,7 @@ public class ParrotScript : MonoBehaviour
 
     }
     private Dialogue CreateNormalParrotDialogue(){
-        //Initialisation of the dialogue if the parrot is hit
+        //Initialisation of the dialogue if the parrot isn't hit
         Dialogue dialogue = new Dialogue();
         dialogue.name= "Parrot";
 
@@ -97,9 +97,11 @@ public class ParrotScript : MonoBehaviour
         return dialogue;
     }
 
-    private Dialogue ChooseDialogue(){
+    private Dialogue ChooseDialogue()
+    { //method that chooses the parrot's dialogue. If the dodo has not hit the parrot orhave apologised
+    //it diplays the normal dilaogue. Otherwise, it displays the IsHitDialogue
         if( isHit==false || isHitDialogue.lines[1].choice2.isChosen==true)
-        {
+        { 
             isHitDialogue.lines[1].choice2.isChosen=false;
             isHit=false;
             return normalDialogue;

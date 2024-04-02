@@ -1,8 +1,8 @@
 [System.Serializable]
 public class DialogueLine
 {
-    public string text;
-    public bool hasChoice;
+    public string text; // the text of the dialogue line
+    public bool hasChoice; //if the player has none or two choices options
     public Choice choice1;
     public Choice choice2;
 

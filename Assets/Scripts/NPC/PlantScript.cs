@@ -56,12 +56,12 @@ public class PlantScript : MonoBehaviour
         //if the player give the poison bottle at the plant, he succeds at the quest, the plant disappear
         if( acceptQuest==true && playerHasWater==true && plantDialogue.lines[1].choice1.isChosen==true)
         {
-            HasWater();
+            GiveWater();
         }
         
     }
-    private void HasWater()
-    {
+    private void GiveWater()
+    { //method if the player gives water to the plant
         if (inventory.FindAndPickItem(poisonBottle)==true)
         { 
             Destroy(plant);
@@ -70,7 +70,7 @@ public class PlantScript : MonoBehaviour
         }
     }
     private bool IsInRangeDialogue()
-    { //function to know if the parrot is in range for the dialogue. He is in range if the euclidienne distance between the parrot and the dodo is below 3
+    { //method to know if the parrot is in range for the dialogue. He is in range if the euclidienne distance between the parrot and the dodo is below 3
         if (Math.Sqrt(Math.Pow(plantBody.position.x -dodoBody.position.x,2) + Math.Pow(plantBody.position.y -dodoBody.position.y,2)) <2) 
         {
             interactionDialogue.GetComponentInChildren<Text>().text="Press P to speak";
@@ -90,14 +90,12 @@ public class PlantScript : MonoBehaviour
     { // if the player is close to the parrot and press P, the dialogue is trigger
         if ( IsInRangeDialogue()==true)
         {
-            //if the quest is accepted, we change the dialogue
             DialogueManager.instance.EndDialogue(); // close others dialogues
             DialogueManager.instance.ChangingDialogue(plantDialogue); //use the parrot dialogue
             DialogueManager.instance.StartDialogue(); // start dialogue
         }
     }
-    
-    
+       
     private Dialogue CreatePlantDialogue()
     { //Creation of the first dialogue of the parrot plant
         Dialogue dialogue = new Dialogue();

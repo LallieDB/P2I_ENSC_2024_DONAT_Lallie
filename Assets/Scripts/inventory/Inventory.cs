@@ -5,13 +5,13 @@ public class Inventory : MonoBehaviour
     [SerializeField] private InventoryDisplay display;
     private InventoryData data;
     public void Awake()
-    {
-        int slotcount=display.Initialization();
+    { // intialization of the inventory
+        int slotcount=display.Initialization(); //we take the number of slot of this inventory
         data=new InventoryData(slotcount);
         display.UpdateDisplay(data.items);
     }
     public Item AddItem( Item _item)
-    {
+    {//method to add the item given in parameter
         if (!data.IsSlotAvailable(_item)) return _item;
         data.AddItem(ref _item);
         display.UpdateDisplay(data.items);
@@ -24,7 +24,7 @@ public class Inventory : MonoBehaviour
         return _choosenItem;
     }
     public bool IsItemInInventory(Item _item)
-    { //function to search if a item is in the inventory and return true or false
+    { //method to search if a item is in the inventory and return true or false
     if (data.HasItem(_item)==true)
     {
         return true;

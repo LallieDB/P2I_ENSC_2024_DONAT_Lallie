@@ -13,7 +13,7 @@ public class dodoMovement : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
+    {   //at the start of the game, we add eggs to the dodo inventory
         inventory = FindObjectOfType<Inventory>();
         inventory.AddItem(intialEggs);
     }
@@ -28,7 +28,7 @@ public class dodoMovement : MonoBehaviour
         MoveDodo(); //Reset the horizontal and vertical movements of the dodo
         SetAnimator(); //Set the appropriate animation for the dodo
 
-        //if the player press O and he has an egg in is inventory, he eats it and gains speed
+        //if the player press O and he has an egg in is inventory, he eats one egg and gains speed
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (inventory.IsItemInInventory(intialEggs))

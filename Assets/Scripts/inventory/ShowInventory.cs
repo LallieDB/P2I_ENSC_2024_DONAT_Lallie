@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class ShowInventory : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // class to display the inventory when the player click on the top-right button
     public GameObject inventoryMenu;
     private bool isInventoryMenuDisplay;
     private Button button;
@@ -12,13 +12,12 @@ public class ShowInventory : MonoBehaviour
     {
         button=GetComponent<Button>();
         button.onClick.AddListener(OnClick);
-        // inventoryMenu=GameObject.Find("Inventory");
         isInventoryMenuDisplay=false;
         inventoryMenu.SetActive(false);
         
     }
     private void OnClick()
-    {
+    {   //method when the player click on the button that manage the inventory
         isInventoryMenuDisplay=!isInventoryMenuDisplay;
         inventoryMenu.SetActive(isInventoryMenuDisplay);
     }
