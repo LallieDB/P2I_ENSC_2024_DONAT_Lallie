@@ -1,7 +1,7 @@
 # P2I_ENSC_2024
 
 ## Installation
-###Lien GitHub et lancement de l’exécutable
+### Lien GitHub et lancement de l’exécutable
 Pour installer le projet sur votre ordinateur, placez-vous tout d'abord dans le bon emplacement de fichier et suivez les consignes suivantes.
 Ouvrez votre terminal de commande et tapez l'instruction suivante : 
 `git clone https://github.com/LallieDB/P2I_ENSC_2024.git`
@@ -12,7 +12,7 @@ Ensuite, il vous faudra double-cliquer sur le fichier **“ClickHereToLaunchTheG
 
 **ATTENTION :** Pour quitter la fenêtre du projet, il faudra que vous ouvrez le gestionnaire des tâches en utilisant les commandes suivantes : “Ctrl +Alt + Suppr”
 
-###Ouvrir le projet sur Unity
+### Ouvrir le projet sur Unity
 Ce projet a été réalisé avec la version 2022.3.13f1 de Unity.
 Ouvrez le projet P2I_ENSC_2024 sur Unity.
 Dans l'onglet "Projet", allez dans "Assets" et doucle cliquez sur le fichier "GameScene".
