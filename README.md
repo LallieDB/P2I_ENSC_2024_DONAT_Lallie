@@ -33,7 +33,7 @@ Cette version git comporte :
 - On peut parler au perroquet à l'aide de la touche P. Le perroquet a deux dialogues différents : un dialogue de base et un second qui s'active si on le pousse. Si on s'excuse dans le deuxième dialogue, le premier dialogue revient.
 - Un coffre au trésor que l'on peut ouvrir en appuyant sur la touche O et qui contient une bouteille de poison.
 - Des messages dans le jeu qui s'activent à proximité des coffres et des personnages pour dire au joueur sur quelle touche il faut qu'il appuie pour interagir avec le décor.
-- Le dodo a un inventaire qui lui permet de stocker des objets
+- Le dodo a un inventaire qui lui permet de stocker des objets.
 - La plante donne pour quête au joueur de lui rapporter de l'eau. On peut donner la bouteille de poison pour faire disparaître la plante et accéder à la partie Nord de l'île.
 
 ### Animations
@@ -43,4 +43,5 @@ Le perroquet a deux animations :
 - une animation de base où il bat des ailes
 - une animation quand il a la tête retournée ou qu'il tourne
 
-
+### Pour aller plus loin
+Les améliorations qui pourront être effectuées dans le futur de ce projet seront l'ajout d’autres quêtes avec la possibilité pour le dodo de quitter son île, l'ajout d'un menu avec un système de sauvegarde et la possibilité de changer les paramètres (affichage, langue, … ) de jeu dans le menu.
