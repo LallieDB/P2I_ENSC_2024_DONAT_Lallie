@@ -8,7 +8,7 @@ Ouvrez votre terminal de commande et tapez l'instruction suivante :
 
 L’exécutable est le dossier : **“TheBirdAndTheIsland.zip”**. Dézipper le dossier.
 
-Ensuite, il vous faudra double-cliquer sur le fichier **“ClickHereToLaunchTheGame.exe”** (il est possible qu’on vous demande si vous voulez êtes sûr de vouloir exécuter le fichier, dans ce cas, il faut que vous allez dans “Informations complémentaires” puis que vous cliquez sur “Exécuter quand même”).
+Ensuite, il vous faudra double-cliquer sur le fichier **“ClickHereToLaunchTheGame.exe”** (il est possible qu’on vous demande si vous êtes sûr de vouloir exécuter le fichier, dans ce cas, il faut que vous allez dans “Informations complémentaires” puis que vous cliquez sur “Exécuter quand même”).
 
 **ATTENTION :** Pour quitter la fenêtre du projet, il faudra que vous ouvrez le gestionnaire des tâches en utilisant les commandes suivantes : “Ctrl +Alt + Suppr”
 
